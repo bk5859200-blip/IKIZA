@@ -1,0 +1,1 @@
+# IKIZA Companion proguard rules

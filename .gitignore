@@ -1,0 +1,24 @@
+# Built binaries & packaging
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# Android & Gradle
+*.iml
+.gradle/
+.gradle
+local.properties
+/local.properties
+build/
+app/build/
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# IDE & OS
+.idea/
+/.idea/
+.DS_Store
+Thumbs.db

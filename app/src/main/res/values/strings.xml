@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">IKIZA</string>
+    <string name="notification_service_label">IKIZA Companion Voice Assistant</string>
+</resources>
