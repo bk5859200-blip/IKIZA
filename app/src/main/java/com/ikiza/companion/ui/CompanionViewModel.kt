@@ -16,6 +16,7 @@ import com.ikiza.companion.settings.AppSettings
 import com.ikiza.companion.settings.SettingsRepository
 import com.ikiza.companion.update.ApkDownloader
 import com.ikiza.companion.update.ApkInstaller
+import com.ikiza.companion.update.ApkVerificationResult
 import com.ikiza.companion.update.CheckResult
 import com.ikiza.companion.update.ReleaseInfo
 import com.ikiza.companion.update.UpdateChecker
@@ -184,6 +185,13 @@ class CompanionViewModel(application: Application) : AndroidViewModel(applicatio
                     _updateStatus.value = UpdateStatus.Downloading(percent, downloaded, total)
                 }
 
+                // Validate package identity, version, and signature before offering installation
+                val verification = ApkInstaller.verifyApk(getApplication(), file)
+                if (verification is ApkVerificationResult.Failure) {
+                    _updateStatus.value = UpdateStatus.Error("Verification failed: ${verification.reason}")
+                    return@launch
+                }
+
                 _updateStatus.value = UpdateStatus.ReadyToInstall(file, release)
 
                 if (ApkInstaller.canRequestPackageInstalls(getApplication())) {
@@ -191,6 +199,7 @@ class CompanionViewModel(application: Application) : AndroidViewModel(applicatio
                 }
             } catch (e: Exception) {
                 _updateStatus.value = UpdateStatus.Error("Download failed: ${e.localizedMessage}")
+
             } finally {
                 animationController.onTaskStateChanged(false)
             }
