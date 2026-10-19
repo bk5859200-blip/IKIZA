@@ -11,8 +11,8 @@ android {
         applicationId = "com.ikiza.companion"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 4
+        versionName = "2.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -64,7 +64,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
 
-    // Jetpack Compose BOM & UI
+    // Jetpack Compose BOM & Material 3
     val composeBom = platform("androidx.compose:compose-bom:2024.02.01")
     implementation(composeBom)
     implementation("androidx.compose.ui:ui")
@@ -73,13 +73,16 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
 
-    // On-device Preferences DataStore
+    // On-Device Preferences DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Periodic Background Update Checks (WorkManager)
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
 
     // Local JVM Unit Testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 
-    // Compose Tooling for debug
+    // Compose Tooling for debug builds
     debugImplementation("androidx.compose.ui:ui-tooling")
 }

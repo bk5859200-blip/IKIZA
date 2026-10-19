@@ -1,53 +1,47 @@
 package com.ikiza.companion.ui.theme
 
 import android.app.Activity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = IkizaPrimary,
-    secondary = IkizaSecondary,
-    tertiary = IkizaAccent,
-    background = IkizaBackgroundDark,
-    surface = IkizaSurfaceDark,
-    onPrimary = androidx.compose.ui.graphics.Color.White,
-    onBackground = IkizaTextPrimaryDark,
-    onSurface = IkizaTextPrimaryDark
-)
-
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+private val AmoledColorScheme = darkColorScheme(
+    primary = AccentRose,
+    onPrimary = TextPrimaryDark,
+    background = AmoledBlack,
+    surface = DarkSurface,
+    surfaceVariant = DarkSurfaceElevated,
+    onBackground = TextPrimaryDark,
+    onSurface = TextPrimaryDark,
+    onSurfaceVariant = TextSecondaryDark,
+    outline = DarkBorder
 )
 
 @Composable
 fun IkizaTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    // Default to our cozy dark theme suited for desk stand display
-    val colorScheme = if (darkTheme) DarkColorScheme else DarkColorScheme
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as? Activity)?.window
             if (window != null) {
-                window.statusBarColor = colorScheme.background.toArgb()
-                WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
+                window.statusBarColor = AmoledBlack.toArgb()
+                window.navigationBarColor = AmoledBlack.toArgb()
+                WindowCompat.getInsetsController(window, view).apply {
+                    isAppearanceLightStatusBars = false
+                    isAppearanceLightNavigationBars = false
+                }
             }
         }
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = AmoledColorScheme,
         typography = Typography,
         content = content
     )

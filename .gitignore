@@ -3,6 +3,8 @@
 *.aab
 *.keystore
 *.jks
+*.bak
+keystores_backup/
 
 # Android & Gradle
 *.iml
