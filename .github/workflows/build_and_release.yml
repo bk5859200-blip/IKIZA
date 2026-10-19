@@ -36,7 +36,10 @@ jobs:
           cache: 'gradle'
 
       - name: Grant Execute Permission for Gradlew
-        run: chmod +x gradlew
+        run: |
+          chmod +x gradlew
+          sed -i '/org.gradle.java.home/d' gradle.properties 2>/dev/null || true
+
 
       - name: Run Unit Tests
         run: ./gradlew testDebugUnitTest --no-daemon --stacktrace
